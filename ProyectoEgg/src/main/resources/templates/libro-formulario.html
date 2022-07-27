@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- habilito la seguridad en Thymeleaf-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <link rel="stylesheet" th:href="@{css/index.css}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title
+      th:text="${action == 'guardar'} ? 'Crear libro' : 'Modificar Libro'"
+    ></title>
+  </head>
+
+  <body>
+    <header th:replace="plantilla/planti :: header"></header>
+    <br />
+
+    <h1
+      th:text="${action == 'guardar'} ? 'Crear libro' : 'Modificar Libro'"
+    ></h1>
+    <br />
+    <a th:href="@{/}">Regresar a Inicio</a>
+    <br />
+    <div class="container-sm">
+      <form
+        class="formulario"
+        autocomplete="off"
+        id="formulario"
+        method="Post"
+        novalidate
+        th:action="@{/libros/__${action}__}"
+        th:object="${libro}"
+      >
+
+          <input
+                  type="hidden"
+                  class="form-control formulario"
+                  name="id"
+                  th:field="*{id}"
+          />
+        <div class="mb-3">
+          <label for="isbn" class="form-label">ISBN: </label>
+          <input
+            type="text"
+            class="form-control formulario"
+            name="isbn"
+            th:field="*{isbn}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="titulo" class="form-label">TITULO: </label>
+          <input
+            type="text"
+            class="form-control"
+            name="titulo"
+            th:field="*{titulo}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="anio" class="form-label">AÑO: </label>
+          <input
+            type="text"
+            class="form-control"
+            name="anio"
+            th:field="*{anio}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="ejemplares" class="form-label">Ejemplares: </label>
+          <input
+            type="text"
+            class="form-control"
+            name="ejemplares"
+            th:field="*{ejemplares}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="ejemplaresPrestados" class="form-label"
+            >Ejemplares Prestados:
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            name="ejemplaresPrestados"
+            th:field="*{ejemplaresPrestados}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="ejemplaresRestantes" class="form-label"
+            >Ejemplares Restantes:
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            name="ejemplaresRestantes"
+            th:field="*{ejemplaresRestantes}"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="anio" class="form-label">AUTOR: </label><br />
+          <select label="Elegir autor" id="autor" th:field="*{autor}">
+            <option selected value="">Elegir autor</option>
+            <option
+              th:each="autor : ${autores}"
+              th:text="|${autor.nombre}|"
+              th:if="${autor.alta}"
+              th:value="${autor.id}"
+            ></option>
+          </select>
+        </div>
+        <div>
+          <label for="editorial">Editorial:</label> <br />
+          <select
+            label="Elegir editorial"
+            id="editorial"
+            th:field="*{editorial}"
+          >
+            <option selected value="">Elegir editorial</option>
+            <option
+              th:each="editorial : ${editoriales}"
+              th:text="|${editorial.nombre}|"
+              th:if="${editorial.alta}"
+              th:value="${editorial.id}"
+            ></option>
+          </select>
+        </div>
+
+        <div>
+          <button
+            class="btn btn-outline-warning"
+            th:text="${action == 'guardar'} ? 'Crear libro' : 'Modificar'"
+            type="submit"
+            id="button-addon2"
+          ></button>
+        </div>
+      </form>
+    </div>
+
+    <footer th:replace="plantilla/planti :: footer"></footer>
+  </body>
+</html>

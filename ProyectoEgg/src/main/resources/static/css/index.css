@@ -1,0 +1,32 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+header {
+  margin-top: 0;
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.carusel {
+  margin: 50px;
+}
+
+.formulario {
+  position: center;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.libro {
+  background-image: url("../imagen/autores.jpg");
+}
